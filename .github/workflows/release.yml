@@ -1,8 +1,8 @@
 name: Release
 
 on:
-  release:
-    types: [published, edited]
+  # release:
+  #   types: [published, edited]
   # workflow_dispatch:
   # push:
   #   branches:
@@ -11,6 +11,10 @@ on:
   #   paths:
   #     - '**/*.go'
   #     - '.github/workflows/release.yml'
+
+  push:
+    tags:
+      - 'v*'
 
 jobs:
   release:
@@ -46,6 +50,33 @@ jobs:
 
           ls -aln ${GITHUB_WORKSPACE}/build/
 
-      - uses: JasonEtco/build-and-tag-action@v2
+      - name: Create Release
+        id: create_release
+        uses: actions/create-release@v1
         env:
-          GITHUB_TOKEN: ${{ github.token }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tag_name: ${{ github.ref }}
+          release_name: Release ${{ github.ref }}
+          body: |
+            Changes in this Release
+            - First Change
+            - Second Change
+          draft: false
+          prerelease: false
+          
+      - name: Upload Release Asset
+        id: upload-release-asset 
+        run: |
+          echo ${PROJECT_NAME}
+          ls -aln ${GITHUB_WORKSPACE}/build/
+
+          
+        # uses: actions/upload-release-asset@v1
+        # env:
+        #   GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        # with:
+        #   upload_url: ${{ steps.create_release.outputs.upload_url }}
+        #   asset_path: ./my-artifact.zip
+        #   asset_name: my-artifact.zip
+        #   asset_content_type: application/zip
