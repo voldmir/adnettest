@@ -24,7 +24,7 @@ jobs:
       - name: Run build project
         run: |
           echo $(ls -aln .)
-          apt-get update
-          apt-get install go
-          go mod tidy
+          # apt-get update
+          # apt-get install go
+          # go mod tidy
           echo $(env)
