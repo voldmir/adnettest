@@ -85,7 +85,7 @@ If the -domain parameter is specified and the server address is not passed, then
 	} else {
 		test_computer_name = hostname
 		if domain == "" {
-			panic("used flag -d=<suffix domain>")
+			panic("used flag -domain <suffix domain>")
 		}
 	}
 

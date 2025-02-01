@@ -1,17 +1,6 @@
 name: Release
 
 on:
-  # release:
-  #   types: [published, edited]
-  # workflow_dispatch:
-  # push:
-  #   branches:
-  #     - main
-  #     - master
-  #   paths:
-  #     - '**/*.go'
-  #     - '.github/workflows/release.yml'
-
   push:
     tags:
       - "v*"
