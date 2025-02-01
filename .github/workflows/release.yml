@@ -30,13 +30,8 @@ jobs:
           export GOARCH=amd64
           export CGO_ENABLED=0
 
-          GOOS=linux go build -o ${GITHUB_WORKSPACE}/build/${PROJECT_NAME}
-          GOOS=windows go build -o ${GITHUB_WORKSPACE}/build/${PROJECT_NAME}64.exe
-          GOOS=386 go build -o ${GITHUB_WORKSPACE}/build/${PROJECT_NAME}32.exe
+          GOOS=linux go build ./cmd/adnettest.go -o ${GITHUB_WORKSPACE}/build/${PROJECT_NAME}
+          GOOS=windows go build ./cmd/adnettest.go -o ${GITHUB_WORKSPACE}/build/${PROJECT_NAME}64.exe
+          GOOS=386 go build ./cmd/adnettest.go -o ${GITHUB_WORKSPACE}/build/${PROJECT_NAME}32.exe
 
-
-
-
-
-
-
+          ls -aln ${GITHUB_WORKSPACE}/build/
