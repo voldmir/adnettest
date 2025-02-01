@@ -48,41 +48,27 @@ jobs:
 
           ls -aln ${GITHUB_WORKSPACE}/build/
 
-      - name: Create release
-        uses: actions/github-script@v6
+      - name: Create Release
+        id: create_release
+        uses: actions/create-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          script: |
-            const fs = require("fs");
+          tag_name: ${{ github.ref }}
+          release_name: Release ${{ github.ref }}
+          body: |
+            Changes in this Release
+            - First Change
+            - Second Change
+          draft: false
+          prerelease: false
 
-            const release = await github.rest.repos.createRelease({
-              owner: context.repo.owner,
-              repo: context.repo.repo,
-              tag_name: ${{ github.ref }},
-              name: "Release ${{ github.ref }}",
-              draft: false,
-              prerelease: false
-            });
-
-            # core.summary.addLink(`Release v${{ env.PKG_VERSION }}`, release.data.html_url);
-            # await core.summary.write();
-
-      # - name: Create Release
-      #   id: create_release
-      #   uses: actions/create-release@v1
-      #   env:
-      #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      #   with:
-      #     tag_name: ${{ github.ref }}
-      #     release_name: Release ${{ github.ref }}
-      #     body: |
-      #       Changes in this Release
-      #       - First Change
-      #       - Second Change
-      #     draft: false
-      #     prerelease: false
-
-      # - name: Upload Release Asset adnettest
-      #   id: upload-release-asset
+      - name: Upload Release Asset adnettest
+        id: upload-release-asset
+        run: |
+          echo '>>>>'
+          ls -aln ${GITHUB_WORKSPACE}
+          ls -aln ${GITHUB_WORKSPACE}/build/ 
       #   uses: actions/upload-release-asset@v1
       #   env:
       #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
