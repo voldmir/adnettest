@@ -32,52 +32,67 @@ jobs:
           cd $GITHUB_WORKSPACE/cmd
           go mod tidy
           mkdir build
-          export PROJECT_NAME=$(basename $RUNNER_WORKSPACE)
           export GOARCH=amd64
           export CGO_ENABLED=0
 
           export GOOS=linux
           export GOARCH=amd64
-          go build -o "${GITHUB_WORKSPACE}/build/${PROJECT_NAME}"
+          go build -o "${GITHUB_WORKSPACE}/build/adnettest"
 
           export GOOS=windows
           export GOARCH=amd64
-          go build -o "${GITHUB_WORKSPACE}/build/${PROJECT_NAME}64.exe"
+          go build -o "${GITHUB_WORKSPACE}/build/adnettest64.exe"
 
           export GOOS=windows
           export GOARCH=386
-          go build -o "${GITHUB_WORKSPACE}/build/${PROJECT_NAME}32.exe"
+          go build -o "${GITHUB_WORKSPACE}/build/adnettest32.exe"
 
           ls -aln ${GITHUB_WORKSPACE}/build/
 
-      # - name: Create Release
-      #   id: create_release
-      #   uses: actions/create-release@v1
-      #   env:
-      #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      #   with:
-      #     tag_name: ${{ github.ref }}
-      #     release_name: Release ${{ github.ref }}
-      #     body: |
-      #       Changes in this Release
-      #       - First Change
-      #       - Second Change
-      #     draft: false
-      #     prerelease: false
+      - name: Create Release
+        id: create_release
+        uses: actions/create-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tag_name: ${{ github.ref }}
+          release_name: Release ${{ github.ref }}
+          body: |
+            Changes in this Release
+            - First Change
+            - Second Change
+          draft: false
+          prerelease: false
           
-      - name: Upload Release Asset
+      - name: Upload Release Asset adnettest
         id: upload-release-asset 
-        run: |
-          export PROJECT_NAME=$(basename $RUNNER_WORKSPACE)
-          echo aaaaa '${PROJECT_NAME}'
-          ls -aln ${GITHUB_WORKSPACE}/build/
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: "${GITHUB_WORKSPACE}/build/adnettest"
+          asset_name: adnettest
+          asset_content_type: application/octet-stream
 
-          
-        # uses: actions/upload-release-asset@v1
-        # env:
-        #   GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        # with:
-        #   upload_url: ${{ steps.create_release.outputs.upload_url }}
-        #   asset_path: ./my-artifact.zip
-        #   asset_name: my-artifact.zip
-        #   asset_content_type: application/zip
+      - name: Upload Release Asset adnettest64.exe
+        id: upload-release-asset 
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: "${GITHUB_WORKSPACE}/build/adnettest64.exe"
+          asset_name: adnettest64.exe
+          asset_content_type: application/octet-stream
+
+      - name: Upload Release Asset adnettest32.exe
+        id: upload-release-asset 
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: "${GITHUB_WORKSPACE}/build/adnettest32.exe"
+          asset_name: adnettest32.exe
+          asset_content_type: application/octet-stream
