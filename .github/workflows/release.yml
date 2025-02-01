@@ -38,13 +38,13 @@ jobs:
           export GOARCH=amd64
           go build -o "${GITHUB_WORKSPACE}/build/adnettest"
 
-          # export GOOS=windows
-          # export GOARCH=amd64
-          # go build -o "${GITHUB_WORKSPACE}/build/adnettest64.exe"
+          export GOOS=windows
+          export GOARCH=amd64
+          go build -o "${GITHUB_WORKSPACE}/build/adnettest64.exe"
 
-          # export GOOS=windows
-          # export GOARCH=386
-          # go build -o "${GITHUB_WORKSPACE}/build/adnettest32.exe"
+          export GOOS=windows
+          export GOARCH=386
+          go build -o "${GITHUB_WORKSPACE}/build/adnettest32.exe"
 
       - name: Create Release
         id: create_release
@@ -63,35 +63,33 @@ jobs:
 
       - name: Upload Release Asset adnettest
         id: upload-release-asset
-        run: |
-          ls -aln .
-      #   uses: actions/upload-release-asset@v1
-      #   env:
-      #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      #   with:
-      #     upload_url: ${{ steps.create_release.outputs.upload_url }}
-      #     asset_path: ./build/adnettest
-      #     asset_name: adnettest
-      #     asset_content_type: application/octet-stream
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: ./build/adnettest
+          asset_name: adnettest
+          asset_content_type: application/octet-stream
 
-      # - name: Upload Release Asset adnettest64.exe
-      #   id: upload-release-asset2
-      #   uses: actions/upload-release-asset@v1
-      #   env:
-      #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      #   with:
-      #     upload_url: ${{ steps.create_release.outputs.upload_url }}
-      #     asset_path: ./build/adnettest64.exe
-      #     asset_name: adnettest64.exe
-      #     asset_content_type: application/octet-stream
+      - name: Upload Release Asset adnettest64.exe
+        id: upload-release-asset2
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: ./build/adnettest64.exe
+          asset_name: adnettest64.exe
+          asset_content_type: application/octet-stream
 
-      # - name: Upload Release Asset adnettest32.exe
-      #   id: upload-release-asset3
-      #   uses: actions/upload-release-asset@v1
-      #   env:
-      #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      #   with:
-      #     upload_url: ${{ steps.create_release.outputs.upload_url }}
-      #     asset_path: ./build/adnettest32.exe
-      #     asset_name: adnettest32.exe
-      #     asset_content_type: application/octet-stream
+      - name: Upload Release Asset adnettest32.exe
+        id: upload-release-asset3
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: ./build/adnettest32.exe
+          asset_name: adnettest32.exe
+          asset_content_type: application/octet-stream
