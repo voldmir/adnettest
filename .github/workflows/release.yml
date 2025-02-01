@@ -23,8 +23,11 @@ jobs:
 
       - name: Run build project
         run: |
+          cd $GITHUB_WORKSPACE
           echo $(ls -aln .)
           # apt-get update
           # apt-get install go
           # go mod tidy
+          echo
+          echo
           echo $(env)
