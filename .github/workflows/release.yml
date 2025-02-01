@@ -29,11 +29,13 @@ jobs:
           export PROJECT_NAME=$(basename $RUNNER_WORKSPACE)
           export GOARCH=amd64
           export CGO_ENABLED=0
-          export GOOS=linux
-          go build -o "${GITHUB_WORKSPACE}/build/${PROJECT_NAME}"
-          export GOOS=windows
-          go build -o "${GITHUB_WORKSPACE}/build/${PROJECT_NAME}64.exe"
-          export GOOS=386
-          go build -o "${GITHUB_WORKSPACE}/build/${PROJECT_NAME}32.exe"
+          # export GOOS=linux
+          # go build -o "${GITHUB_WORKSPACE}/build/${PROJECT_NAME}"
+          # export GOOS=windows
+          # go build -o "${GITHUB_WORKSPACE}/build/${PROJECT_NAME}64.exe"
+          # export GOOS=386
+          # go build -o "${GITHUB_WORKSPACE}/build/${PROJECT_NAME}32.exe"
+
+          go env
 
           ls -aln ${GITHUB_WORKSPACE}/build/
