@@ -68,28 +68,28 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: "${GITHUB_WORKSPACE}/build/adnettest"
+          asset_path: ./build/adnettest
           asset_name: adnettest
           asset_content_type: application/octet-stream
 
-      # - name: Upload Release Asset adnettest64.exe
-      #   id: upload-release-asset2
-      #   uses: actions/upload-release-asset@v1
-      #   env:
-      #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      #   with:
-      #     upload_url: ${{ steps.create_release.outputs.upload_url }}
-      #     asset_path: "${GITHUB_WORKSPACE}/build/adnettest64.exe"
-      #     asset_name: adnettest64.exe
-      #     asset_content_type: application/octet-stream
+      - name: Upload Release Asset adnettest64.exe
+        id: upload-release-asset2
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: ./build/adnettest64.exe
+          asset_name: adnettest64.exe
+          asset_content_type: application/octet-stream
 
-      # - name: Upload Release Asset adnettest32.exe
-      #   id: upload-release-asset3
-      #   uses: actions/upload-release-asset@v1
-      #   env:
-      #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      #   with:
-      #     upload_url: ${{ steps.create_release.outputs.upload_url }}
-      #     asset_path: "${GITHUB_WORKSPACE}/build/adnettest32.exe"
-      #     asset_name: adnettest32.exe
-      #     asset_content_type: application/octet-stream
+      - name: Upload Release Asset adnettest32.exe
+        id: upload-release-asset3
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: ./build/adnettest32.exe
+          asset_name: adnettest32.exe
+          asset_content_type: application/octet-stream
