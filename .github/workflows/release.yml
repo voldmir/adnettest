@@ -32,6 +32,10 @@ jobs:
 
           ls -aln  ./cmd/
 
+          echo "${GITHUB_WORKSPACE}/build/${PROJECT_NAME}""
+          echo "${GITHUB_WORKSPACE}/build/${PROJECT_NAME}64.exe"
+          echo "${GITHUB_WORKSPACE}/build/${PROJECT_NAME}32.exe"
+
           # GOOS=linux go build ./cmd/adnettest.go -o ${GITHUB_WORKSPACE}/build/${PROJECT_NAME}
           # GOOS=windows go build ./cmd/adnettest.go -o ${GITHUB_WORKSPACE}/build/${PROJECT_NAME}64.exe
           # GOOS=386 go build ./cmd/adnettest.go -o ${GITHUB_WORKSPACE}/build/${PROJECT_NAME}32.exe
