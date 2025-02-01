@@ -68,7 +68,8 @@ jobs:
       - name: Upload Release Asset
         id: upload-release-asset 
         run: |
-          echo ${PROJECT_NAME}
+          export PROJECT_NAME=$(basename $RUNNER_WORKSPACE)
+          echo aaaaa '${PROJECT_NAME}'
           ls -aln ${GITHUB_WORKSPACE}/build/
 
           
