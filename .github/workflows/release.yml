@@ -33,9 +33,12 @@ jobs:
           # go build -o "${GITHUB_WORKSPACE}/build/${PROJECT_NAME}"
           # export GOOS=windows
           # go build -o "${GITHUB_WORKSPACE}/build/${PROJECT_NAME}64.exe"
-          # export GOOS=386
-          # go build -o "${GITHUB_WORKSPACE}/build/${PROJECT_NAME}32.exe"
+          export GOOS=windows
+          export GOARCH=386
 
-          go env
+          go env GOARCH
+          go env GOOS
+
+          go build -o "${GITHUB_WORKSPACE}/build/${PROJECT_NAME}32.exe"
 
           ls -aln ${GITHUB_WORKSPACE}/build/
